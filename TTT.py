@@ -7,15 +7,13 @@
 
 
 def print_board(board):
-    """Prints the game board."""
+    """Draw board."""
     for row in board:
         print(" | ".join(row))
         print("-" * (len(row) * 4 - 1))
 
 def check_winner(board, player, win_condition):
-    """
-    Checks if the player has won based on the win condition.
-    """
+    """Has player has won."""
     rows = len(board)
     cols = len(board[0])
     
@@ -42,17 +40,14 @@ def check_winner(board, player, win_condition):
         for j in range(cols - win_condition + 1):
             if all(board[i - k][j + k] == player for k in range(win_condition)):
                 return True
-    
     return False
 
 def is_board_full(board):
-    """Checks if the board is full."""
+    """board is full, check all cells"""
     return all(cell != " " for row in board for cell in row)
 
 def play_game(rows, cols, win_condition):
-    """
-    Plays the Tic Tac Toe game with the specified grid size and win condition.
-    """
+    """start the Tic Tac Toe game."""
     board = [[" " for _ in range(cols)] for _ in range(rows)]
     players = ["X", "O"]
     turn = 0
@@ -68,14 +63,14 @@ def play_game(rows, cols, win_condition):
         # Get player's move
         while True:
             try:
-                row = int(input(f"Enter row (0-{rows - 1}): "))
-                col = int(input(f"Enter column (0-{cols - 1}): "))
+                row = int(input(f"Row (0-{rows - 1}): "))
+                col = int(input(f"Column (0-{cols - 1}): "))
                 if 0 <= row < rows and 0 <= col < cols and board[row][col] == " ":
                     break
                 else:
-                    print("Invalid move. Try again.")
+                    print("Wrong. Try again.")
             except ValueError:
-                print("Invalid input. Please enter numbers.")
+                print("Wrong. Please enter numbers.")
         
         # Update the board
         board[row][col] = player
@@ -95,7 +90,7 @@ def play_game(rows, cols, win_condition):
         turn += 1
 
 def main():
-    """Main function to select the level and start the game."""
+    """Select the level and start the game."""
     print("Welcome to Enhanced Tic Tac Toe!")
     print("Select a level:")
     print("1. Level 1: 3x3 grid, 3 in a row to win")
@@ -107,7 +102,7 @@ def main():
         if choice in ["1", "2", "3"]:
             break
         else:
-            print("Invalid choice. Please try again.")
+            print("Wrong again. Please try again.")
     
     if choice == "1":
         play_game(3, 3, 3)
